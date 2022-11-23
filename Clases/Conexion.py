@@ -25,3 +25,9 @@ class Conexion_BD():
 
   def cerrar(self):
     self.conexion.close()
+  
+  def fetchone(self):
+    return self.cursor.fetchone()
+  
+  def fetchall(self):
+    return self.cursor.fetchall()
