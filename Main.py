@@ -12,7 +12,7 @@ from Clases.Sala import Sala
 
 conexion = Conexion_BD("./Cinemar.db")
 
-with open("./Recursos/Cinemar.sql","r") as archivo :
+with open("./Assets/Cinemar.db.sql","r") as archivo :
   script = archivo.read()
   
 conexion.script(script)
