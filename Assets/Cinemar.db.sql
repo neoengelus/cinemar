@@ -43,15 +43,22 @@ CREATE TABLE IF NOT EXISTS "reserva" (
 	"cant_asiento"	INTEGER,
 	"costo"			FLOAT,
 	"dias"			TEXT(45),
+	"id_butaca"		TEXT(5),
 	FOREIGN KEY("id_funcion") REFERENCES "funcion"("id_funcion") ON DELETE NO ACTION ON UPDATE NO ACTION,
 	FOREIGN KEY("dni") REFERENCES "usuario"("dni") ON DELETE NO ACTION ON UPDATE NO ACTION,
 	FOREIGN KEY("dias") REFERENCES "descuento"("dias") ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY("id_butaca") REFERENCES "butaca"("id_butaca") ON DELETE NO ACTION ON UPDATE NO ACTION,
 	PRIMARY KEY("id_reserva" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "descuento" (
 	"dias"			TEXT(45) NOT NULL,
 	"porcentaje"	FLOAT,
 	PRIMARY KEY("dias")
+);
+CREATE TABLE IF NOT EXISTS "butaca" (
+	"id_butaca"		TEXT(5) NOT NULL,
+	"estado"		BOOLEAN,
+	PRIMARY KEY("id_butaca")
 );
 CREATE TABLE IF NOT EXISTS "usuario" (
 	"dni"	T	EXT(45) NOT NULL,

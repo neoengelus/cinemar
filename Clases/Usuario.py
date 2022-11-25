@@ -50,6 +50,7 @@ class Usuario:
   @tipo.setter
   def tipo(self, tipo):
     self.__tipo = tipo
+    
   def tipoUsuario(self):
     if self.__tipo == 0:
       return "Administrador"
@@ -57,6 +58,7 @@ class Usuario:
       return "Registrado"
     else:
       return "Visitante"
+    
   def __str__(self):
     cadena = "Nombre: " + self.__nombre
     cadena += "\nApellido: " + self.__apellido
@@ -68,3 +70,14 @@ class Usuario:
   
   def mayorEdad(self):
     return self.__edad >= 18
+
+  def cargarUsuario(self,tipo):
+    self.nombre = input("Ingrese su nombre: ")
+    self.apellido = input("Ingrese su apellido: ")
+    self.edad = input("Ingrese su edad: ")
+    self.dni = input("Ingrese su DNI: ")
+    self.email = input("Ingrese su e-mail: ")
+    self.tipo = tipo
+    passw = input("Ingrese su contraseña: ")
+    #Lllamnar al métodp que carga el usuario con la BD.cargarUsuario(self,passw,tipo)
+    #print(self)
