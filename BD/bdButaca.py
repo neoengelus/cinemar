@@ -6,9 +6,9 @@ Created on 24 nov. 2022
 
 from Clases.Conexion import Conexion_BD
 
-def mostrarButaca(BD,id_reserva):
+def mostrarButaca(BD,id_butaca):
   conexion = Conexion_BD(BD)
-  consulta = f"SELECT * FROM butaca WHERE id_reserva = {id_reserva}"
+  consulta = f"SELECT * FROM butaca WHERE id_butaca = {id_butaca}"
   conexion.consulta(consulta)
   resultado = conexion.fetchall()
   conexion.cerrar()
@@ -16,22 +16,22 @@ def mostrarButaca(BD,id_reserva):
 
 def buscarButaca(BD,butaca):
   conexion = Conexion_BD(BD)
-  consulta = f"SELECT * FROM butaca WHERE butaca = '{butaca}'"
+  consulta = f"SELECT * FROM butaca WHERE id_butaca = '{butaca}'"
   conexion.consulta(consulta)
   resultado = conexion.fetchall()
   conexion.cerrar()
   return resultado
 
-def cargarButaca(BD,id_reserva,butaca):
+def cargarButaca(BD,butaca):
   conexion = Conexion_BD(BD)
-  consulta = f"INSERT INTO butaca VALUES('{butaca.fila}{butaca.asiento}',{id_reserva})"
+  consulta = f"INSERT INTO butaca VALUES('{butaca.sala}{butaca.fila}{butaca.asiento},null')"
   conexion.consulta(consulta)
   conexion.commit()
   conexion.cerrar()
   
-def borrarButaca(BD, id_reserva, butaca):
+def borrarButaca(BD, butaca):
   conexion = Conexion_BD(BD)
-  consulta = f"DELETE FROM butaca WHERE id_reserva = {id_reserva} AND butaca = '{butaca.fila}{butaca.asiento}'"
+  consulta = f"DELETE FROM butaca WHERE id_butaca = {butaca}"
   conexion.consulta(consulta)
   conexion.commit()
   conexion.cerrar()
@@ -39,33 +39,11 @@ def borrarButaca(BD, id_reserva, butaca):
 def actualizarButaca(BD,butaca):
   existe = buscarButaca(BD, butaca)
   if existe != [] :
-    print("+------------------------------------------------------------------+")
-    print("|                     Modificación de Butaca                       |")
-    print("+------------------------------------------------------------------+")
-    print("|                                                                  |")
-    print("| (1) Cambiar Butaca                                               |")
-    print("| (2) Cambiar Reservación                                          |")
-    print("| (3) Salir                                                        |")
-    print("|                                                                  |")
-    print("+------------------------------------------------------------------+")
-    opcion = int(input(("| Ingrese su opción: ") ))
-    if opcion == 1 : 
-      op = input("Ingrese la nueva butaca por ej H17: ")
-      conexion = Conexion_BD(BD)
-      consulta = f"UPDATE butaca SET butaca = {op} WHERE id_reserva = {existe[0][1]}"
-      conexion.consulta(consulta)
-      conexion.commit()
-      conexion.cerrar()
-    elif opcion == 2 :
-      op = int(input("Ingrese el identificador de la función: "))
-      conexion = Conexion_BD(BD)
-      consulta = f"UPDATE butaca SET id_reserva = {op} WHERE butaca = {existe[0][0]}"
-      conexion.consulta(consulta)
-      conexion.commit()
-      conexion.cerrar()
-    elif opcion == 3 :
-      pass
-    else :
-      print("Opción incorrecta")
+    op = input("Ingrese la nueva butaca por ej 1H17: ")
+    conexion = Conexion_BD(BD)
+    consulta = f"UPDATE butaca SET id_butaca = {op} WHERE id_butaca = {existe[0][0]}"
+    conexion.consulta(consulta)
+    conexion.commit()
+    conexion.cerrar()
   else :
     print("Error no existe la butaca ",butaca)

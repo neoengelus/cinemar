@@ -11,6 +11,14 @@ from BD import bdSala, bdButaca
 
 BD = "./Cinemar.db"
 
+def esNumero(num):
+  try :
+    num + 10
+  except TypeError:
+    resultado = False
+  else :
+    resultado = True
+  return resultado
 
 '''with open("./Assets/Cinemar.sql","r") as archivo :
   script = archivo.read()
@@ -33,5 +41,6 @@ resultados = bdSala.mostarSalas(BD,2)
   print(room)'''
 nuevaSala = Sala(peli,asiento,600,20,1,True)
 #bdSala.cargarSala(BD, nuevaSala)
-hola = bdButaca.buscarButaca(BD, "H17")
-print(hola[0][0])
+hola = bdButaca.buscarButaca(BD, "1H17")
+print(hola)
+print(esNumero("10"))
