@@ -24,9 +24,7 @@ CREATE TABLE IF NOT EXISTS "sala" (
 	"butaca_ocupada"	INTEGER,
 	"costo"				FLOAT,
 	"id_pelicula"		INTEGER,
-	"id_butaca"			TEXT(45),
 	FOREIGN KEY("id_pelicula") REFERENCES "pelicula"("id_pelicula") ON DELETE NO ACTION ON UPDATE NO ACTION,
-	FOREIGN KEY("id_butaca") REFERENCES "butaca"("id_butaca") ON DELETE NO ACTION ON UPDATE NO ACTION,
 	PRIMARY KEY("id_sala" AUTOINCREMENT)
 );
 CREATE TABLE IF NOT EXISTS "reserva" (
@@ -50,9 +48,11 @@ CREATE TABLE IF NOT EXISTS "descuento" (
 	PRIMARY KEY("dias")
 );
 CREATE TABLE IF NOT EXISTS "butaca" (
-	"id_butaca"		TEXT(45) NOT NULL,
-	"estado"		BOOLEAN,
-	PRIMARY KEY("id_butaca")
+	"fila"		TEXT(45) NOT NULL,
+	"asiento"	TEXT(45) NOT NULL,
+	"id_sala"	INTEGER,
+	FOREIGN KEY("id_sala") REFERENCES "sala"("id_sala") ON DELETE NO ACTION ON UPDATE NO ACTION,
+	PRIMARY KEY("id_sala","asiento","fila"),
 );
 CREATE TABLE IF NOT EXISTS "usuario" (
 	"dni"	T	EXT(45) NOT NULL,
