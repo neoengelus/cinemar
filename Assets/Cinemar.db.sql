@@ -27,20 +27,24 @@ CREATE TABLE IF NOT EXISTS "sala" (
 	FOREIGN KEY("id_pelicula") REFERENCES "pelicula"("id_pelicula") ON DELETE NO ACTION ON UPDATE NO ACTION,
 	PRIMARY KEY("id_sala" AUTOINCREMENT)
 );
-CREATE TABLE IF NOT EXISTS "reserva" (
+CREATE TABLE "reserva" (
 	"id_reserva"	INTEGER NOT NULL,
 	"id_funcion"	INTEGER,
-	"dni"			TEXT(45),
+	"dni"	TEXT(45),
 	"fecha_reserva"	TEXT(45),
 	"cant_asiento"	INTEGER,
-	"costo"			FLOAT,
-	"dias"			TEXT(45),
-	"id_butaca"		TEXT(45),
-	FOREIGN KEY("id_funcion") REFERENCES "funcion"("id_funcion") ON DELETE NO ACTION ON UPDATE NO ACTION,
+	"costo"	FLOAT,
+	"dias"	TEXT(45),
+	"fila"	TEXT,
+	"asiento"	TEXT,
+	"id_pelicula"	INTEGER,
+	PRIMARY KEY("id_reserva" AUTOINCREMENT),
 	FOREIGN KEY("dni") REFERENCES "usuario"("dni") ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY("id_funcion") REFERENCES "funcion"("id_funcion") ON DELETE NO ACTION ON UPDATE NO ACTION,
 	FOREIGN KEY("dias") REFERENCES "descuento"("dias") ON DELETE NO ACTION ON UPDATE NO ACTION,
-	FOREIGN KEY("id_butaca") REFERENCES "butaca"("id_butaca") ON DELETE NO ACTION ON UPDATE NO ACTION,
-	PRIMARY KEY("id_reserva" AUTOINCREMENT)
+	FOREIGN KEY("fila") REFERENCES "butaca"("fila") ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY("asiento") REFERENCES "butaca"("butaca") ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY("id_pelicula") REFERENCES "pelicula"("id_pelicula") ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 CREATE TABLE IF NOT EXISTS "descuento" (
 	"dias"			TEXT(45) NOT NULL,
