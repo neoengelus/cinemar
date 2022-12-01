@@ -97,4 +97,4 @@ def actualizarSala(BD,id_sala):
       print("Opción incorrecta")
   else :
     print("Error Sala no encontrada")
-    
+
