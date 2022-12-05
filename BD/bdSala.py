@@ -98,3 +98,16 @@ def actualizarSala(BD,id_sala):
   else :
     print("Error Sala no encontrada")
 
+def mostrarSalaPelicula(BD,id_sala):
+  sala = buscarSala(BD, id_sala)
+  conexion = Conexion_BD(BD)
+  consulta = f"""SELECT sala.id_sala, sala.tipo_sala, sala.butaca_max, sala.butaca_ocupada, 
+            sala.costo, pelicula.titulo 
+            FROM sala 
+            JOIN pelicula on sala.id_pelicula = pelicula.id_pelicula 
+            WHERE sala.id_pelicula = {sala[0][5]}
+            """
+  conexion.consulta(consulta)
+  resultado = conexion.fetchall()
+  conexion.cerrar()
+  return resultado
