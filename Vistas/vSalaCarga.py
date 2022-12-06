@@ -12,6 +12,7 @@ from BD import bdSala
 
 
 BD = "./Cinemar.db"
+ICON = "./Assets/cine.png"
 
 class ventanaSalaCarga(QWidget):
   def __init__(self):
@@ -20,8 +21,11 @@ class ventanaSalaCarga(QWidget):
   
   def cargarUi(self):
     loadUi(".\Vistas\salaCarga.ui",self)
-    self.setWindowIcon(QtGui.QIcon("./Assets/cine.png"))
+    self.setWindowIcon(QtGui.QIcon(ICON))
     self.btnCargarSala.clicked.connect(lambda: self.cargarSala())
+    self.tabla.setSelectionBehavior(QTableView.SelectRows)
+    self.tabla.clicked.connect(lambda : self.cargarIdPeli())
+    self.cargarTabla()
     self.show()  
   
   def cargarSala(self):
@@ -29,14 +33,23 @@ class ventanaSalaCarga(QWidget):
     costo = self.txtCosto.text()
     peli = self.txtIdPeli.text()
     ocupada = self.txtOcupada.text()
+    tipo = self.cmbTipoSala.currentIndex()
     
     if capacidad == "" or costo == "" or peli == "" :
       self.error("Los valores de Capacidad, Costo e Id Película son obligatorios")
-      if self.esNumero(costo) and self.esNumero(capacidad) and self.esNumero(ocupada) :
-        pass
-      else :
-        self.error("Los Valores de Costo, Capacidad y Butacas Ocupadas deben ser numéricos")
-      
+    elif (self.esNumero(costo) and self.esNumero(capacidad) and self.esNumero(ocupada)) or ocupada == "" :
+      if ocupada == "" :
+        ocupada = 0 #si no hago esto crashea
+      capacidad = int(capacidad)
+      costo = float(costo)
+      peli = int(peli)
+      ocupada = int(ocupada)
+      tipo = bool(tipo)
+      print(capacidad,costo,peli,ocupada,tipo)
+      bdSala.cargarSalaValores(BD,tipo,capacidad,ocupada,costo,peli)
+      self.exito("La operación se realizó con éxito")
+    else :
+      self.error("Los Valores de Costo, Capacidad y Butacas Ocupadas deben ser numéricos")
     
   def error(self,mensaje):
     QMessageBox.critical(self, "Error", mensaje)
@@ -47,9 +60,30 @@ class ventanaSalaCarga(QWidget):
     else :
       return False
   
+  def exito(self,mensaje):
+    QMessageBox.information(self, "Éxito", mensaje)
+  
   def esNumero(self, num):
     try:
         float(num)
         return True
     except ValueError:
       return False
+    
+  def cargarTabla(self):
+    resultados = bdSala.cargarPeliculas(BD)
+    tablerow = 0
+    self.tabla.setRowCount(len(resultados))
+    for resultado in resultados:
+      self.tabla.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(resultado[0])))
+      self.tabla.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(resultado[1])))
+      self.tabla.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(resultado[2])))
+      self.tabla.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(resultado[3])))
+      self.tabla.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(resultado[4])))
+      tablerow+=1
+  
+  def cargarIdPeli(self):
+    lista = self.tabla.currentRow()
+    id = self.tabla.item(lista, 0).text()
+    self.txtIdPeli.setText(id)
+    

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>vSalaCarga</class>
- <widget class="QWidget" name="vSalaCarga">
+ <class>vSalaModifica</class>
+ <widget class="QWidget" name="vSalaModifica">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,66 +17,16 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Cinemar - Carga de Salas</string>
+   <string>Cinemar - Modificación de Sala</string>
   </property>
-  <widget class="QWidget" name="centralwidget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>641</width>
-     <height>481</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>650</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuMenu">
-    <property name="title">
-     <string>Menu</string>
-    </property>
-    <addaction name="actionSalir"/>
-   </widget>
-   <widget class="QMenu" name="menuAyuda">
-    <property name="title">
-     <string>Ayuda</string>
-    </property>
-    <addaction name="actionAcerca_de"/>
-   </widget>
-   <addaction name="menuMenu"/>
-   <addaction name="menuAyuda"/>
-  </widget>
-  <widget class="QStatusBar" name="statusbar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>3</width>
-     <height>18</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>30</y>
+     <y>10</y>
      <width>621</width>
-     <height>461</height>
+     <height>481</height>
     </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>650</width>
-     <height>505</height>
-    </size>
    </property>
    <property name="frameShape">
     <enum>QFrame::StyledPanel</enum>
@@ -84,52 +34,17 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QTableWidget" name="tabla">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>250</y>
-      <width>611</width>
-      <height>201</height>
-     </rect>
-    </property>
-    <column>
-     <property name="text">
-      <string>Id Película</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Duración</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Director</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Título</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Clasificación</string>
-     </property>
-    </column>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>0</x>
       <y>10</y>
       <width>611</width>
       <height>211</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="1">
+     <item row="1" column="1">
       <spacer name="horizontalSpacer_8">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -142,20 +57,7 @@
        </property>
       </spacer>
      </item>
-     <item row="0" column="6">
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="7">
+     <item row="1" column="7">
       <spacer name="horizontalSpacer_4">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -168,14 +70,27 @@
        </property>
       </spacer>
      </item>
-     <item row="0" column="12">
-      <widget class="QPushButton" name="btnCargarSala">
+     <item row="1" column="12">
+      <widget class="QPushButton" name="btnActulizarSala">
        <property name="text">
-        <string>Cargar Sala</string>
+        <string>Actualizar Sala</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="9">
+     <item row="1" column="6">
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="9">
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -188,21 +103,28 @@
        </property>
       </spacer>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="lblOcupada">
        <property name="text">
         <string>Butacas Ocupadas</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="lblIdPeli">
+     <item row="5" column="0">
+      <widget class="QLabel" name="lblPeli">
        <property name="text">
         <string>Película</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="8">
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblCapacidad">
+       <property name="text">
+        <string>Capacidad</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="8">
       <spacer name="horizontalSpacer_5">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -215,24 +137,44 @@
        </property>
       </spacer>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="lblCapacidad">
+     <item row="4" column="2">
+      <widget class="QLineEdit" name="txtCosto">
        <property name="text">
-        <string>Capacidad</string>
+        <string/>
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
-      <widget class="QLineEdit" name="txtCapacidad"/>
+     <item row="2" column="3">
+      <spacer name="horizontalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="lblCosto">
        <property name="text">
         <string>Costo</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
+     <item row="2" column="2">
+      <widget class="QLineEdit" name="txtCapacidad"/>
+     </item>
+     <item row="3" column="2">
+      <widget class="QLineEdit" name="txtOcupada">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
       <widget class="QComboBox" name="cmbTipoSala">
        <item>
         <property name="text">
@@ -246,34 +188,7 @@
        </item>
       </widget>
      </item>
-     <item row="2" column="2">
-      <widget class="QLineEdit" name="txtOcupada">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QLineEdit" name="txtCosto">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <spacer name="horizontalSpacer_6">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="5">
+     <item row="1" column="5">
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -286,14 +201,28 @@
        </property>
       </spacer>
      </item>
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QLabel" name="lblTipoSala">
        <property name="text">
         <string>Tipo Sala</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblSala">
+       <property name="text">
+        <string>Número Sala</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLineEdit" name="txtSala">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="2" colspan="6">
       <widget class="QLineEdit" name="txtIdPeli">
        <property name="text">
         <string/>
@@ -303,16 +232,6 @@
     </layout>
    </widget>
   </widget>
-  <action name="actionSalir">
-   <property name="text">
-    <string>Salir</string>
-   </property>
-  </action>
-  <action name="actionAcerca_de">
-   <property name="text">
-    <string>Acerca de...</string>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>

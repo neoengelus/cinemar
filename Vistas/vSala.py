@@ -9,9 +9,10 @@ from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableView
 from PyQt5.Qt import QMainWindow
 from BD import bdSala
-from Vistas import vSalaCarga
+from Vistas import vSalaCarga, vSalaModifica
 
 BD = "./Cinemar.db"
+ICON = "./Assets/cine.png"
 
 class ventanaSala(QMainWindow):
   def __init__(self):
@@ -20,7 +21,7 @@ class ventanaSala(QMainWindow):
   
   def cargarUi(self):
     loadUi(".\Vistas\sala.ui",self)
-    self.setWindowIcon(QtGui.QIcon("./Assets/cine.png"))
+    self.setWindowIcon(QtGui.QIcon(ICON))
     self.btnBuscar.clicked.connect(lambda: self.buscar())
     self.tabla.setSelectionBehavior(QTableView.SelectRows)
     self.tabla.clicked.connect(lambda : self.celdaClick())
@@ -45,12 +46,13 @@ class ventanaSala(QMainWindow):
   def cargarTabla(self, resultados):
     tablerow = 0
     for resultado in resultados:
+      pelicula = bdSala.buscarPelicula(BD, int(resultado[0]))
       self.tabla.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(resultado[0])))
       self.tabla.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(self.determinarTipoSala(resultado[1])))
       self.tabla.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(resultado[2])))
       self.tabla.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(resultado[3])))
       self.tabla.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(resultado[4])))
-      self.tabla.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(resultado[5])))
+      self.tabla.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(pelicula[3])))
       tablerow+=1
   
   def error(self,mensaje):
@@ -61,6 +63,9 @@ class ventanaSala(QMainWindow):
       return True
     else :
       return False
+    
+  def exito(self,mensaje):
+    QMessageBox.information(self, "Éxito", mensaje)
   
   def buscar(self):
     texto = self.txtNroSala.text()
@@ -85,7 +90,14 @@ class ventanaSala(QMainWindow):
     lista = self.tabla.currentRow()
     id = self.tabla.item(lista, 0).text()
     return id
-    
+  
+  def listaInfoSala(self):
+    lista = self.tabla.currentRow()
+    info = list()
+    for i in range(0,6) :
+      info.append(self.tabla.item(lista, i).text())
+    return info
+
   def borrar(self):
     try:
       id_sala = self.celdaClick()
@@ -105,6 +117,10 @@ class ventanaSala(QMainWindow):
     self.carga = vSalaCarga.ventanaSalaCarga()
   
   def modificar(self):
-    pass
-    #self.carga = vSalaModificar.ventanaSalaModificar()
+    try:
+      id_sala = self.celdaClick()
+    except:
+      self.error("Debe seleccionar un valor primero")
+    else :
+      self.modifica = vSalaModifica.ventanaSalaModifica(self.listaInfoSala())
     

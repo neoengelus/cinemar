@@ -31,6 +31,14 @@ def cargarSala(BD,sala):
   conexion.consulta(consulta)
   conexion.commit()
   conexion.cerrar()
+
+def cargarSalaValores(BD,tipoSala,butacaMax,butacaOcupada,costo,id_pelicula):
+  conexion = Conexion_BD(BD)
+  consulta = f"""INSERT INTO sala VALUES 
+            (null,{tipoSala},{butacaMax},{butacaOcupada},{costo},{id_pelicula})"""
+  conexion.consulta(consulta)
+  conexion.commit()
+  conexion.cerrar()
   
 def borrarSala(BD,id_sala):
   conexion = Conexion_BD(BD)
@@ -109,5 +117,21 @@ def mostrarSalaPelicula(BD,id_sala):
             """
   conexion.consulta(consulta)
   resultado = conexion.fetchall()
+  conexion.cerrar()
+  return resultado
+
+def cargarPeliculas(BD):
+  conexion = Conexion_BD(BD)
+  consulta = f"SELECT * FROM Pelicula"
+  conexion.consulta(consulta)
+  resultado = conexion.fetchall()
+  conexion.cerrar()
+  return resultado
+
+def buscarPelicula(BD, id):
+  conexion = Conexion_BD(BD)
+  consulta = f"SELECT * FROM Pelicula WHERE id_pelicula = {id}"
+  conexion.consulta(consulta)
+  resultado = conexion.fetchone()
   conexion.cerrar()
   return resultado
