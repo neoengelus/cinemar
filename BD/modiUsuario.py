@@ -28,7 +28,7 @@ class PantallaModi(QWidget):
         self.boxEmail.setText (usuario[2])
         self.boxEdad.setText (str(usuario[4]))
         self.boxPass.setText (usuario[5])
-        self.boxTipo.setText (str(usuario[6]))
+        self.boxTipo.setText (str(usuario[6])) 
         
     def revisarCampos(self):
         dni = self.box_dni.toPlainText()
