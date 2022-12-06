@@ -60,3 +60,16 @@ class Sala:
     cadena += f"\nTipo Sala: {self.determinarTipoSala()}\nCantidad de Butacas: {self.__butacaMax}"
     cadena += f"\nCantidad de Butacas Ocupadas: {self.__butacaOcupada}\nCosto: $ {self.__costo}"
     return cadena
+  
+  #def crea_sala(self):
+    
+  def modi_Sala(self,peli, but, cost,but_max,but_ocu,ti_sala):
+    self.pelicula=peli
+    self.butaca=but
+    self.costo =cost
+    self.butaca_max = but_max
+    self.butaca_ocupada = but_ocu
+    self.tipo_sala =ti_sala
+    
+  def eli_Sala (self):
+     
