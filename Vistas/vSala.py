@@ -6,7 +6,7 @@ Created on 2 dic. 2022
 
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtWidgets import QMessageBox, QTableView
+from PyQt5.QtWidgets import QMessageBox, QTableView, qApp
 from PyQt5.Qt import QMainWindow
 from BD import bdSala
 from Vistas import vSalaCarga, vSalaModifica
@@ -28,6 +28,8 @@ class ventanaSala(QMainWindow):
     self.btnEliminar.clicked.connect(lambda: self.borrar())
     self.btnCargar.clicked.connect(lambda: self.cargar())
     self.btnModificar.clicked.connect(lambda: self.modificar())
+    self.actionSalir.triggered.connect(qApp.quit)
+    self.actionAcerca_de.triggered.connect(lambda: self.info())
     self.show()  
   
   def determinarTipoSala(self, tipo):
@@ -46,7 +48,7 @@ class ventanaSala(QMainWindow):
   def cargarTabla(self, resultados):
     tablerow = 0
     for resultado in resultados:
-      pelicula = bdSala.buscarPelicula(BD, int(resultado[0]))
+      pelicula = bdSala.buscarPelicula(BD, int(resultado[5]))
       self.tabla.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(resultado[0])))
       self.tabla.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(self.determinarTipoSala(resultado[1])))
       self.tabla.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(resultado[2])))
@@ -67,6 +69,9 @@ class ventanaSala(QMainWindow):
   def exito(self,mensaje):
     QMessageBox.information(self, "Éxito", mensaje)
   
+  def info(self):
+    QMessageBox.about(self, "Sistema de Gestión Cinemar", "Desarrollado por CodeWarriors \nUsando Python 3 y Qt 5 \nBajo Licencia GPL")
+  
   def buscar(self):
     texto = self.txtNroSala.text()
     indice =  self.cmbTipoSala.currentIndex()
@@ -83,6 +88,8 @@ class ventanaSala(QMainWindow):
         resultados = bdSala.buscarSala(BD,texto)
         self.tabla.setRowCount(len(resultados))
         self.cargarTabla(resultados)
+        if resultados == [] :
+          self.error("No se encontró la Sala buscada")
       else :
         self.error("El valor ingresado debe ser numérico")
   

@@ -29,30 +29,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>650</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuMenu">
-    <property name="title">
-     <string>Menu</string>
-    </property>
-    <addaction name="actionSalir"/>
-   </widget>
-   <widget class="QMenu" name="menuAyuda">
-    <property name="title">
-     <string>Ayuda</string>
-    </property>
-    <addaction name="actionAcerca_de"/>
-   </widget>
-   <addaction name="menuMenu"/>
-   <addaction name="menuAyuda"/>
-  </widget>
   <widget class="QStatusBar" name="statusbar">
    <property name="geometry">
     <rect>

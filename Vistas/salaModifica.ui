@@ -220,6 +220,9 @@
        <property name="text">
         <string/>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item row="5" column="2" colspan="6">
@@ -229,7 +232,55 @@
        </property>
       </widget>
      </item>
+     <item row="5" column="8">
+      <widget class="QPushButton" name="btnMostrarPeli">
+       <property name="text">
+        <string>Mostrar Peliculas</string>
+       </property>
+      </widget>
+     </item>
     </layout>
+   </widget>
+   <widget class="QTableWidget" name="tabla">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>240</y>
+      <width>611</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="showGrid">
+     <bool>true</bool>
+    </property>
+    <column>
+     <property name="text">
+      <string>Id Película</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Duración</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Director</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Título</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Clasificación</string>
+     </property>
+    </column>
    </widget>
   </widget>
  </widget>

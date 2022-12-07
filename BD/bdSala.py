@@ -106,6 +106,20 @@ def actualizarSala(BD,id_sala):
   else :
     print("Error Sala no encontrada")
 
+def actualizaSala(BD,lista):
+  conexion = Conexion_BD(BD)
+  consulta = f"""UPDATE sala SET 
+                tipo_sala = {lista[1]},
+                butaca_max = {lista[2]},
+                butaca_ocupada = {lista[3]},
+                costo = {lista[4]},
+                id_pelicula = {lista[5]}
+                WHERE id_sala = {lista[0]};
+            """
+  conexion.consulta(consulta)
+  conexion.commit()
+  conexion.cerrar()
+
 def mostrarSalaPelicula(BD,id_sala):
   sala = buscarSala(BD, id_sala)
   conexion = Conexion_BD(BD)
