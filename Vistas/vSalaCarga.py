@@ -86,4 +86,3 @@ class ventanaSalaCarga(QWidget):
     lista = self.tabla.currentRow()
     id = self.tabla.item(lista, 0).text()
     self.txtIdPeli.setText(id)
-    

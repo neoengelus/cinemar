@@ -149,3 +149,18 @@ def buscarPelicula(BD, id):
   resultado = conexion.fetchone()
   conexion.cerrar()
   return resultado
+
+def capacidadSala(BD,id):
+  conexion = Conexion_BD(BD)
+  consulta = f"SELECT butaca_max, butaca_ocupada FROM sala WHERE id_sala = {id}"
+  conexion.consulta(consulta)
+  resultado = conexion.fetchone()
+  conexion.cerrar()
+  return resultado
+
+def actualizarCapacidad(BD, id, ocupada):
+  conexion = Conexion_BD(BD)
+  consulta = f"UPDATE sala SET butaca_ocupada = {ocupada} WHERE id_sala = {id}"
+  conexion.consulta(consulta)
+  conexion.commit()
+  conexion.cerrar()

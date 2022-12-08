@@ -115,6 +115,7 @@ class ventanaSala(QMainWindow):
       if respuesta :
         bdSala.borrarSala(BD, id_sala)
         resultados = bdSala.mostarSalas(BD, 2)
+        self.exito("El registro se eliminó correctamente")
         self.tabla.setRowCount(len(resultados))
         self.cargarTabla(resultados)
       else :
@@ -131,3 +132,10 @@ class ventanaSala(QMainWindow):
     else :
       self.modifica = vSalaModifica.ventanaSalaModifica(self.listaInfoSala())
     
+  def closeEvent(self, event):
+    #Cierra todas las ventanas abiertas
+    try:
+        self.carga.close()
+        self.modifica.close() 
+    except:
+        pass
