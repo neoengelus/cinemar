@@ -337,7 +337,8 @@ border: 3px solid black</string>
      <string notr="true">border-radius:20px;
 background-color:rgb(85, 170, 255);
 font: 14pt &quot;MS Shell Dlg 2&quot;;
-border: 2px solid black</string>
+border: 2px solid black;
+box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);</string>
     </property>
     <property name="text">
      <string>BUSCAR</string>
