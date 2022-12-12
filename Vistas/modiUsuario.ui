@@ -317,7 +317,8 @@ p, li { white-space: pre-wrap; }
     <property name="styleSheet">
      <string notr="true">border-radius:20px;
 background-color:rgb(85, 170, 255);
-font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
+font: 14pt &quot;MS Shell Dlg 2&quot;;
+border: 3px solid black</string>
     </property>
     <property name="text">
      <string>MODIFICAR</string>
@@ -335,7 +336,8 @@ font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
     <property name="styleSheet">
      <string notr="true">border-radius:20px;
 background-color:rgb(85, 170, 255);
-font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
+font: 14pt &quot;MS Shell Dlg 2&quot;;
+border: 2px solid black</string>
     </property>
     <property name="text">
      <string>BUSCAR</string>
