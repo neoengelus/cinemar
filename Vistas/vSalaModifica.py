@@ -14,43 +14,28 @@ from BD import bdSala
 BD = "./Cinemar.db"
 ICON = "./Assets/cine.png"
 
-class ventanaSalaCarga(QWidget):
-  def __init__(self):
-    super(ventanaSalaCarga, self).__init__()
+class ventanaSalaModifica(QWidget):
+  def __init__(self, lista):
+    super(ventanaSalaModifica, self).__init__()
+    self.infoSala = lista
     self.cargarUi()
   
   def cargarUi(self):
-    loadUi(".\Vistas\salaCarga.ui",self)
+    loadUi(".\Vistas\salaModifica.ui",self)
     self.setWindowIcon(QtGui.QIcon(ICON))
-    self.btnCargarSala.clicked.connect(lambda: self.cargarSala())
+    self.txtSala.setText(self.infoSala[0])
+    self.cmbTipoSala.setCurrentIndex(self.determinarTipoSala(self.infoSala[1]))
+    self.txtCapacidad.setText(self.infoSala[2])
+    self.txtOcupada.setText(self.infoSala[3])
+    self.txtCosto.setText(self.infoSala[4])
+    self.txtIdPeli.setText(self.infoSala[5])
+    self.btnActulizarSala.clicked.connect(lambda: self.actualizarSala())
+    self.btnMostrarPeli.clicked.connect(lambda: self.mostrarPeli())
     self.tabla.setSelectionBehavior(QTableView.SelectRows)
-    self.tabla.clicked.connect(lambda : self.cargarIdPeli())
-    self.cargarTabla()
+    self.tabla.clicked.connect(lambda : self.celdaClick())
+    self.tabla.setVisible(False)
     self.show()  
-  
-  def cargarSala(self):
-    capacidad = self.txtCapacidad.text()
-    costo = self.txtCosto.text()
-    peli = self.txtIdPeli.text()
-    ocupada = self.txtOcupada.text()
-    tipo = self.cmbTipoSala.currentIndex()
-    
-    if capacidad == "" or costo == "" or peli == "" :
-      self.error("Los valores de Capacidad, Costo e Id Película son obligatorios")
-    elif (self.esNumero(costo) and self.esNumero(capacidad) and self.esNumero(ocupada)) or ocupada == "" :
-      if ocupada == "" :
-        ocupada = 0 #si no hago esto crashea
-      capacidad = int(capacidad)
-      costo = float(costo)
-      peli = int(peli)
-      ocupada = int(ocupada)
-      tipo = bool(tipo)
-      print(capacidad,costo,peli,ocupada,tipo)
-      bdSala.cargarSalaValores(BD,tipo,capacidad,ocupada,costo,peli)
-      self.exito("La operación se realizó con éxito")
-    else :
-      self.error("Los Valores de Costo, Capacidad y Butacas Ocupadas deben ser numéricos")
-    
+      
   def error(self,mensaje):
     QMessageBox.critical(self, "Error", mensaje)
   
@@ -69,8 +54,30 @@ class ventanaSalaCarga(QWidget):
         return True
     except ValueError:
       return False
-    
-  def cargarTabla(self):
+  
+  def determinarTipoSala(self, tipo):
+    if tipo == "2D" :
+      return 0
+    else :
+      return 1
+  
+  def actualizarSala(self):
+    try:
+      lista = list()
+      lista.append(self.infoSala[0])
+      lista.append(self.cmbTipoSala.currentIndex())
+      lista.append(self.txtCapacidad.text())
+      lista.append(self.txtOcupada.text())
+      lista.append(self.txtCosto.text())
+      lista.append(self.id_pelicula)
+      print(lista)
+      bdSala.actualizaSala(BD,lista)
+      self.exito(f"Se realizó con éxito la actualización de la Sala Nº {self.infoSala[0]}")
+    except Exception as e:
+      print(str(e))
+  
+  def mostrarPeli(self):
+    self.tabla.setVisible(True)
     resultados = bdSala.cargarPeliculas(BD)
     tablerow = 0
     self.tabla.setRowCount(len(resultados))
@@ -82,7 +89,8 @@ class ventanaSalaCarga(QWidget):
       self.tabla.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(resultado[4])))
       tablerow+=1
   
-  def cargarIdPeli(self):
+  def celdaClick(self):
     lista = self.tabla.currentRow()
     id = self.tabla.item(lista, 0).text()
-    self.txtIdPeli.setText(id)
+    self.txtIdPeli.setText(self.tabla.item(lista, 3).text())
+    self.id_pelicula = id

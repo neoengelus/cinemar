@@ -31,6 +31,14 @@ def cargarSala(BD,sala):
   conexion.consulta(consulta)
   conexion.commit()
   conexion.cerrar()
+
+def cargarSalaValores(BD,tipoSala,butacaMax,butacaOcupada,costo,id_pelicula):
+  conexion = Conexion_BD(BD)
+  consulta = f"""INSERT INTO sala VALUES 
+            (null,{tipoSala},{butacaMax},{butacaOcupada},{costo},{id_pelicula})"""
+  conexion.consulta(consulta)
+  conexion.commit()
+  conexion.cerrar()
   
 def borrarSala(BD,id_sala):
   conexion = Conexion_BD(BD)
@@ -98,6 +106,20 @@ def actualizarSala(BD,id_sala):
   else :
     print("Error Sala no encontrada")
 
+def actualizaSala(BD,lista):
+  conexion = Conexion_BD(BD)
+  consulta = f"""UPDATE sala SET 
+                tipo_sala = {lista[1]},
+                butaca_max = {lista[2]},
+                butaca_ocupada = {lista[3]},
+                costo = {lista[4]},
+                id_pelicula = {lista[5]}
+                WHERE id_sala = {lista[0]};
+            """
+  conexion.consulta(consulta)
+  conexion.commit()
+  conexion.cerrar()
+
 def mostrarSalaPelicula(BD,id_sala):
   sala = buscarSala(BD, id_sala)
   conexion = Conexion_BD(BD)
@@ -111,3 +133,34 @@ def mostrarSalaPelicula(BD,id_sala):
   resultado = conexion.fetchall()
   conexion.cerrar()
   return resultado
+
+def cargarPeliculas(BD):
+  conexion = Conexion_BD(BD)
+  consulta = f"SELECT * FROM Pelicula"
+  conexion.consulta(consulta)
+  resultado = conexion.fetchall()
+  conexion.cerrar()
+  return resultado
+
+def buscarPelicula(BD, id):
+  conexion = Conexion_BD(BD)
+  consulta = f"SELECT * FROM Pelicula WHERE id_pelicula = {id}"
+  conexion.consulta(consulta)
+  resultado = conexion.fetchone()
+  conexion.cerrar()
+  return resultado
+
+def capacidadSala(BD,id):
+  conexion = Conexion_BD(BD)
+  consulta = f"SELECT butaca_max, butaca_ocupada FROM sala WHERE id_sala = {id}"
+  conexion.consulta(consulta)
+  resultado = conexion.fetchone()
+  conexion.cerrar()
+  return resultado
+
+def actualizarCapacidad(BD, id, ocupada):
+  conexion = Conexion_BD(BD)
+  consulta = f"UPDATE sala SET butaca_ocupada = {ocupada} WHERE id_sala = {id}"
+  conexion.consulta(consulta)
+  conexion.commit()
+  conexion.cerrar()
