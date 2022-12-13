@@ -39,7 +39,6 @@ class ventanaLogin(QWidget):
       elif self.esNumero(dni):
         resultado = bdUsuario.buscarUsuario(BD, dni)
         if resultado != None :
-          print(resultado)
           if resultado[5] == passw :
             pass
             #mostrar la pantalla de acuerdo al tipo de usuario 

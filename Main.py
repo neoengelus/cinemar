@@ -1,4 +1,3 @@
-
 '''
 Created on 1 nov. 2022
 
@@ -6,15 +5,14 @@ Created on 1 nov. 2022
 '''
 
 import sys
-from Vistas.vSala import ventanaSala
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QDialog, QApplication
-
+from Vistas.vLogin import ventanaLogin
+from PyQt5.QtWidgets import  QApplication
 
 BD = "./Cinemar.db"
+ICON = "./Assets/cine.png"
 
 app = QApplication(sys.argv)
-mainwindow = ventanaSala()
+mainwindow = ventanaLogin()
 try:
     sys.exit(app.exec_())
 except:

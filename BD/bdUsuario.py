@@ -2,7 +2,7 @@ from Clases.Conexion import Conexion_BD
 
 def altaUsuario (BD,persona,password):
     conexion= Conexion_BD(BD)
-    consulta = f"INSERT INTO usuario VALUES('{persona.dni}','{persona.nombre}','{persona.mail}','{persona.apellido}','{persona.edad}','{password}','{persona.tipo}')"
+    consulta = f"INSERT INTO usuario VALUES('{persona.dni}','{persona.nombre}','{persona.email}','{persona.apellido}','{persona.edad}','{password}','{persona.tipo}')"
     conexion.consulta(consulta)
     conexion.commit()
     conexion.cerrar()
