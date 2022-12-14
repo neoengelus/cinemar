@@ -44,7 +44,7 @@ def actualizarFuncion(BD,id_funcion, hora, fecha, sala):
 def cargarFuncion(BD, pelicula, hora, fecha, sala):
   conexion = Conexion_BD(BD)
   consulta = f"""INSERT INTO funcion VALUES 
-                        (null, {pelicula}, {hora}, {fecha}, {sala}) 
+                        (null, {pelicula}, '{hora}', '{fecha}', {sala}) 
               """
   conexion.consulta(consulta)
   conexion.commit()

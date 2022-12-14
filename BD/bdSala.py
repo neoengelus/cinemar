@@ -150,6 +150,14 @@ def buscarPelicula(BD, id):
   conexion.cerrar()
   return resultado
 
+def buscarPeliculaNombre(BD, nombre):
+  conexion = Conexion_BD(BD)
+  consulta = f"SELECT * FROM Pelicula WHERE titulo = '{nombre}'"
+  conexion.consulta(consulta)
+  resultado = conexion.fetchone()
+  conexion.cerrar()
+  return resultado
+
 def capacidadSala(BD,id):
   conexion = Conexion_BD(BD)
   consulta = f"SELECT butaca_max, butaca_ocupada FROM sala WHERE id_sala = {id}"
