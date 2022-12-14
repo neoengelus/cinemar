@@ -46,12 +46,16 @@ class ventanaReserva(QMainWindow):
       print(str(e))
   
   def cargarCombo(self):
-    lista = self.tabla.currentRow()
-    id_sala = self.tabla.item(lista, 4).text()
-    capacidad_sala = bdSala.capacidadSala(BD, id_sala)
-    letra_max = capacidad_sala / 10
-    for i in range(0, capacidad_sala +1):
-      pass
+    try :
+      lista = self.tabla.currentRow()
+      id_sala = self.tabla.item(lista, 0).text()
+      capacidad_sala = bdSala.capacidadSala(BD, id_sala)
+      fila_sala = capacidad_sala[0] // 10
+      for letra in range(65, 65 + fila_sala):
+        for i in range(1, fila_sala +1):
+          print(chr(letra),i)
+    except Exception as e :
+      print(str(e))
   
   def determinarTipoSala(self, tipo):
     if tipo : 
