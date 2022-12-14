@@ -49,3 +49,37 @@ def cargarFuncion(BD, pelicula, hora, fecha, sala):
   conexion.consulta(consulta)
   conexion.commit()
   conexion.cerrar()
+  
+def mostrarFuncion(BD):
+  conexion = Conexion_BD(BD)
+  consulta= f"""SELECT 
+                funcion.id_funcion, funcion.horario, funcion.dia_funcion,
+                funcion.id_pelicula, funcion.id_sala, 
+                pelicula.titulo, pelicula.duracion, pelicula.clasificacion,
+                sala.tipo_sala, sala.costo, sala.butaca_ocupada, sala.butaca_max
+            FROM funcion
+            JOIN pelicula ON pelicula.id_pelicula = funcion.id_pelicula
+            JOIN sala on sala.id_pelicula = funcion.id_pelicula
+            """
+  conexion.consulta(consulta)
+  resultado = conexion.fetchall()
+  conexion.cerrar()
+  return resultado
+
+def mostrarFuncionFecha(BD, fecha):
+  conexion = Conexion_BD(BD)
+  consulta= f"""SELECT 
+                funcion.id_funcion, funcion.horario, funcion.dia_funcion,
+                funcion.id_pelicula, funcion.id_sala, 
+                pelicula.titulo, pelicula.duracion, pelicula.clasificacion,
+                sala.tipo_sala, sala.costo, sala.butaca_ocupada, sala.butaca_max
+            FROM funcion
+            JOIN pelicula ON pelicula.id_pelicula = funcion.id_pelicula
+            JOIN sala on sala.id_pelicula = funcion.id_pelicula
+            WHERE funcion.dia_funcion = '{fecha}'
+            """
+  conexion.consulta(consulta)
+  resultado = conexion.fetchall()
+  conexion.cerrar()
+  return resultado
+
