@@ -70,6 +70,4 @@ class Sala:
     self.butaca_max = but_max
     self.butaca_ocupada = but_ocu
     self.tipo_sala =ti_sala
-    
-  def eli_Sala (self):
-     
+  
