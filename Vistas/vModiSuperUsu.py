@@ -4,7 +4,6 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QWidget
 from PyQt5.QtWidgets import QMessageBox,QTableView
 from PyQt5.QtWidgets import QLineEdit
-
 from PyQt5.QtGui import QPixmap
 import sqlite3
 
