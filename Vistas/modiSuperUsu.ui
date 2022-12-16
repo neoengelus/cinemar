@@ -147,6 +147,9 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
       <height>41</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Presione despues de modificar los datos</string>
+    </property>
     <property name="styleSheet">
      <string notr="true">border-radius:20px;
 background-color:rgb(85, 170, 255);
@@ -167,6 +170,12 @@ border-style: outset</string>
       <height>41</height>
      </rect>
     </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="toolTip">
+     <string>Presione para buscar un DNI</string>
+    </property>
     <property name="styleSheet">
      <string notr="true">border-radius:20px;
 background-color:rgb(85, 170, 255);
@@ -177,12 +186,15 @@ border-style: outset</string>
     <property name="text">
      <string>BUSCAR</string>
     </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QTableWidget" name="tableListUsu">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>320</y>
+      <x>80</x>
+      <y>310</y>
       <width>771</width>
       <height>301</height>
      </rect>
@@ -191,6 +203,9 @@ border-style: outset</string>
      <string notr="true">background:rgb(111, 222, 255);
 background:rgb(167, 212, 235);</string>
     </property>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
     <column>
      <property name="text">
       <string>Dni</string>
