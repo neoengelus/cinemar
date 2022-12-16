@@ -8,7 +8,7 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QMessageBox, QTableView, qApp
 from PyQt5.Qt import QMainWindow
-from  Vistas import vReserva, vUsuarioCarga, vSala, vButaca
+from  Vistas import vReserva, vUsuarioCarga, vSala, vButaca, vModiSuperUsu
 
 BD = "./Cinemar.db"
 ICON = "./Assets/cine.png"
@@ -40,7 +40,10 @@ class ventanaBienvenida(QMainWindow):
     self.vReserva = vReserva.ventanaReserva()
   
   def modifica(self):
-    self.vModifica = vUsuarioCarga.ventanaUsuarioCarga()
+    if self.datosUsuario[6] == 1 : 
+      self.vModifica = vUsuarioCarga.ventanaUsuarioCarga()
+    else :
+      self.vModifica = vModiSuperUsu.PantallaModi()
   
   def sala(self):
     self.vSala = vSala.ventanaSala()

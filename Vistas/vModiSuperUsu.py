@@ -1,11 +1,14 @@
 import sys
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QDialog, QApplication, QWidget
 from PyQt5.QtWidgets import QMessageBox,QTableView
 from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtGui import QPixmap
 import sqlite3
+
+BD = "./Cinemar.db"
+ICON = "./Assets/cine.png"
 
 class PantallaModi(QWidget):
     usuarioActivo=False
@@ -14,6 +17,10 @@ class PantallaModi(QWidget):
         loadUi(".\Vistas\modiSuperUsu.ui",self)
         self.btnBuscar.clicked.connect(self.llenarboxes)
         self.btnConfirmar.clicked.connect(self.revisarCampos)
+        self.setWindowIcon(QtGui.QIcon(ICON))
+        self.setWindowTitle("Cinemar - Gestión Datos de Usuario")
+        self.setFixedSize(966,723)
+        self.show()
         
     def llenarboxes(self):
         dniUsuario = self.box_dni.text()
@@ -94,15 +101,3 @@ class PantallaModi(QWidget):
             
             
                 
-# main
-BD = "./Cinemar.db"
-app = QApplication(sys.argv)
-pantModi1 = PantallaModi()
-widget = QtWidgets.QStackedWidget()
-widget.addWidget(pantModi1)
-widget.show()
-
-try:
-    sys.exit(app.exec_())
-except:
-    print("Exiting")

@@ -5,7 +5,6 @@ Created on 1 nov. 2022
 '''
 
 import sys
-from Vistas.vFuncion import ventanaFuncion
 from PyQt5.QtWidgets import  QApplication
 from Vistas.vLogin import ventanaLogin
 
