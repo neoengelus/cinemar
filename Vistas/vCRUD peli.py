@@ -11,13 +11,34 @@ class PantallaModi(QWidget):
     usuarioActivo=False
     def __init__(self):
         super(PantallaModi, self).__init__()
-        loadUi(".\Vistas\modiSuperUsu.ui",self)
-        self.btnBuscar.clicked.connect(self.llenarboxes)
+        loadUi(".\Vistas\CRUDPeli.ui",self)
+        self.cargaTablaPeli()
         self.btnConfirmar.clicked.connect(self.revisarCampos)
-        self.btnEli.clicked.connect(self.eliminar)
-        
-    def eliminar(self):
-        dniUsuario = self.box_dni.text()
+        self.btnEli.clicked.connect(self.eliminarPeli)
+        self.btnNuevo.clicked.connect(self.nuevaPeli)
+        list_clasi = ["Geek", "Geeky Geek", "Legend Geek", "Ultra Legend Geek"]
+        self.comboClasi.addItems(list_clasi)
+        self.tableListUsu.setColumnWidth(1, 400)
+    
+    def nuevaPeli(self):
+        titulo=self.boxTitulo.text ()
+        duracion=self.boxDuracion.text ()
+        clasi=self.comboClasi.currentText()
+        director=self.boxDirector.text ()
+        if titulo=="" or duracion=="" or director=="" :
+            QMessageBox.critical(self, "Error","No pueden haber campos vacios")
+            return
+        else:
+            conn = sqlite3.connect(BD)
+            cur = conn.cursor()
+            query =f"insert into pelicula (titulo, duracion,clasificacion, director) values ('{titulo}','{duracion}','{clasi}', '{director}')"
+            cur.execute(query)
+            conn.commit()
+            QMessageBox.critical(self, "Exito","Se ha creado la pelicula Exitosamente")
+            self.cargaTablaPeli()
+            
+    def eliminarPeli(self):
+        codPeli = self.boxIdpeli.text()
         resp = QMessageBox.question(self, 'Advertencia', "Desea borrar el Usuario?", QMessageBox.Yes | QMessageBox.Cancel)
         if resp == QMessageBox.Cancel:
             
@@ -25,33 +46,13 @@ class PantallaModi(QWidget):
             return
         conn = sqlite3.connect(BD)
         cur = conn.cursor()
-        if dniUsuario=="" :
+        if codPeli=="" :
             return
-        query =f"delete FROM usuario WHERE dni ='{dniUsuario}'"
+        query =f"delete FROM pelicula WHERE id_pelicula ='{codPeli}'"
         cur.execute(query)
         conn.commit()
-        QMessageBox.critical(self, "Confirmacion Borrado","Se ha borrado el Usuario")
-        query =f"SELECT * FROM usuario"
-        cur.execute(query)  
-        setUsuarios=cur.fetchall()
-        self.tableListUsu.setRowCount(len(setUsuarios))
-        conn.commit()
-        conn.close()
-        
-        tablerow=0
-        for fila in setUsuarios:
-            self.tableListUsu.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(fila[0])))
-            self.tableListUsu.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(fila[1]))
-            self.tableListUsu.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(fila[3]))
-            self.tableListUsu.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(fila[2]))
-            self.tableListUsu.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(fila[4])))
-            if str(fila[6])=="1":
-                tipou="1 - Admin"
-            else:
-                tipou="0 - Usuario"    
-            self.tableListUsu.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(tipou))
-            tablerow+=1
-        conn.close()
+        QMessageBox.critical(self, "Confirmacion Borrado","Se ha borrado la Pelicula")
+        self.cargaTablaPeli()       
         
     def llenarboxes(self):
         dniUsuario = self.box_dni.text()
@@ -62,7 +63,7 @@ class PantallaModi(QWidget):
         cur.execute(query)
         usuario = cur.fetchone()
         conn.commit()
-        #conn.close()
+        conn.close()
         
         if usuario :
             self.boxNombre.setText (usuario[1])
@@ -74,26 +75,6 @@ class PantallaModi(QWidget):
         else:
             QMessageBox.critical(self, "Error","No hay Coincidencias")
             usuarioActivo=False 
-        query =f"SELECT * FROM usuario"
-        cur.execute(query)  
-        setUsuarios=cur.fetchall()
-        self.tableListUsu.setRowCount(len(setUsuarios))
-        conn.commit()
-        #conn.close()
-        tablerow=0
-        for fila in setUsuarios:
-            
-            self.tableListUsu.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(fila[0])))
-            self.tableListUsu.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(fila[1]))
-            self.tableListUsu.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(fila[3]))
-            self.tableListUsu.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(fila[2]))
-            self.tableListUsu.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(fila[4])))
-            if str(fila[6])=="1":
-                tipou="1 - Admin"
-            else:
-                tipou="0 - Usuario"    
-            self.tableListUsu.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(tipou))
-            tablerow+=1
         
     def revisarCampos(self):
         dni=self.box_dni.text ()
@@ -131,8 +112,24 @@ class PantallaModi(QWidget):
             self.llenarboxes()
             QMessageBox.critical(self, "Exito","Se han modificado los Datos Exitosamente")
             
-            
-                
+    def cargaTablaPeli(self):
+        conn = sqlite3.connect(BD)
+        cur = conn.cursor()
+        query =f"SELECT * FROM pelicula"
+        cur.execute(query)
+        setPelis = cur.fetchall()
+        self.tableListUsu.setRowCount(len(setPelis))
+        conn.commit()
+        #conn.close
+        tablerow = 0
+        for fila in setPelis:
+            print (fila)
+            self.tableListUsu.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(fila[1])))
+            self.tableListUsu.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(fila[2]))
+            self.tableListUsu.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(fila[4]))           
+            self.tableListUsu.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(fila[3]))           
+            tablerow+=1    
+        conn.close        
 # main
 BD = "./Cinemar.db"
 app = QApplication(sys.argv)
