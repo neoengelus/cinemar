@@ -9,7 +9,7 @@ def buscarPelicula(BD):
   return peliculas
 
 def modificarPelicula(BD,nombre,id_pelicula):
-  conexión  =  Conexion_BD (BD)
+  conexion  =  Conexion_BD (BD)
   cursor=conexion.cursor()
   cursor.execute("UPDATE peliculas SET titulo={nombre} WHERE id_pelicula={id_pelicula}")
   conexion.commit()
@@ -20,7 +20,7 @@ def eliminarPelicula (BD,id_pelicula):
   cursor=conexion.cursor()
   cursor.execute("DELETE FROM peliculas WHERE id_pelicula={id_pelicula} ")
   conexion.commit()
-  conexión.close()
+  conexion.close()
 
 def nuevaPelicula (BD,id_pelicula): 
   conexion  =  Conexion_BD (BD)
@@ -28,5 +28,5 @@ def nuevaPelicula (BD,id_pelicula):
   cursor.execute("INSERT INTO pelicula VALUES (nombre, director, duracion, categoria)") 
   nuevapeli=cursor.fetchall()
   conexion.commit()
-  conexión.close()
+  conexion.close()
   return nuevapeli
