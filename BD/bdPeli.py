@@ -1,28 +1,32 @@
-import pelis_DB
-conexion=pelis_DB.connect ('peliculas_DB')
-cursor=conexion.cursor()
-cursor.execute("SELECT * FROM peliculas")
-peliculas=cursor.fetchall()
-conexion.close()
+from Clases.Conexion import Conexion_BD
 
-print("Lista de Peliculas")
-print("NombrePelicula \tID \t Director \t Duracion \t Categoria")
-i=1
-for pelicula in peliculas:
-    print (f"{i} \t {pelicula[0]} \t {pelicula[1]} \t {pelicula[2]} \t {pelicula[3]}")
-i=i+1
-    print(peliculas)
-
-import pelis_DB
-conexión  =  pelis_DB.connect ('peliculas_DB')
+def buscarPelicula(BD):
+  conexion=Conexion_BD (BD)
   cursor=conexion.cursor()
-  cursor.execute("UPDATE peliculas SET NombrePelicula='?',Director='?' ,Duracion='?',  Categoria='?' \ WHERE NombrePelicula='?' ,Director='?' ,Duracion='?',  Categoria='?' "
-  conexion.commit()
-  conexión.close()
+  cursor.execute("SELECT * FROM peliculas")
+  peliculas=cursor.fetchall()
+  conexion.close()
+  return peliculas
 
-import pelis_DB eliminarPeliculas 
-  conexión  =  pelis_DB.connect ('peliculas_DB')
+def modificarPelicula(BD,nombre,id_pelicula):
+  conexion  =  Conexion_BD (BD)
   cursor=conexion.cursor()
-  cursor.execute("DELETE FROM peliculas WHERE NombrePelicula='?' ,Director='?' ,Duracion='?',  Categoria='?' "
+  cursor.execute("UPDATE peliculas SET titulo={nombre} WHERE id_pelicula={id_pelicula}")
   conexion.commit()
-  conexión.close()
+  conexion.close()
+
+def eliminarPelicula (BD,id_pelicula): 
+  conexion  =  Conexion_BD (BD)
+  cursor=conexion.cursor()
+  cursor.execute("DELETE FROM peliculas WHERE id_pelicula={id_pelicula} ")
+  conexion.commit()
+  conexion.close()
+
+def nuevaPelicula (BD,id_pelicula): 
+  conexion  =  Conexion_BD (BD)
+  cursor=conexion.cursor()
+  cursor.execute("INSERT INTO pelicula VALUES (nombre, director, duracion, categoria)") 
+  nuevapeli=cursor.fetchall()
+  conexion.commit()
+  conexion.close()
+  return nuevapeli

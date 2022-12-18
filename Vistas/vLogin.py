@@ -10,7 +10,8 @@ from PyQt5.QtWidgets import QMessageBox, QLineEdit, qApp
 from PyQt5.Qt import QMainWindow, QWidget
 from BD import bdUsuario
 from Clases.Usuario import Usuario
-from Vistas import vUsuarioCarga
+from Vistas import vUsuarioCarga, vBienvenida
+import Vistas
 
 BD = "./Cinemar.db"
 ICON = "./Assets/cine.png"
@@ -40,8 +41,7 @@ class ventanaLogin(QWidget):
         resultado = bdUsuario.buscarUsuario(BD, dni)
         if resultado != None :
           if resultado[5] == passw :
-            pass
-            #mostrar la pantalla de acuerdo al tipo de usuario 
+            self.bienvenida = vBienvenida.ventanaBienvenida(resultado)
           else :
             self.error("Contraseña incorrecta")
         else :
