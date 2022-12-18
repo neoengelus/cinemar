@@ -11,6 +11,7 @@ from PyQt5.Qt import QMainWindow
 from BD import bdSala, bdFuncion, bdReserva, bdButaca
 from datetime import datetime
 import time
+from Clases.Butaca import Butaca
 
 BD = "./Cinemar.db"
 ICON = "./Assets/cine.png"
@@ -56,12 +57,8 @@ class ventanaReserva(QMainWindow):
       butaca = list()
       for letra in range(65, 65 + fila_sala):
         for i in range(1, CANT_ASIENTO +1):
-          butaca.append(chr(letra) + str(i)) #Carga las butacas en una lista
+          butaca.append(chr(letra) + " " +str(i)) #Carga las butacas en una lista
       butaca_sala = bdButaca.mostrarButacas(BD, id_sala) #Busca las butacas ocupadas
-      print(butaca_sala) 
-      print(len(butaca_sala))
-      print(butaca)
-      print(len(butaca))
       if len(butaca_sala) == 0 : 
         self.lstButaca.addItems(butaca) #Carga todas las butacas en caso de este vacía la sala
       elif len(butaca_sala) == capacidad_sala[0] :
@@ -69,7 +66,7 @@ class ventanaReserva(QMainWindow):
       else :
         butacas_sala = list()
         for elemento in butaca_sala :
-          butacas_sala.append(str(elemento[0]) + str(elemento[1])) #arma la lista con las butacas ocupadas según la consulta sql
+          butacas_sala.append(str(elemento[0]) + " " +str(elemento[1])) #arma la lista con las butacas ocupadas según la consulta sql
         for elemento in butacas_sala :
           if elemento in butaca :
             butaca.remove(elemento)
@@ -84,9 +81,16 @@ class ventanaReserva(QMainWindow):
         self.error("Primero debe seleccionar una Sala y una Butaca")
       else:
         butacas = list()
+        lista = self.tabla.currentRow()
+        id_sala = self.tabla.item(lista, 0).text()
         for x in range(len(butaca_inidice)):
-            butacas.append(butaca_inidice[x].text())
-        print(butacas[0][1:]) 
+            butacas.append(butaca_inidice[x].text()) #crea una lista con las butacas seleccionadas
+        for x in range(len(butacas)):
+          butaca_aux = butacas[x].split() #separa la fila del nro de asiento
+          butaca = Butaca(butaca_aux[0],butaca_aux[1],id_sala)
+          bdButaca.cargarButaca(BD, butaca) #registra la butaca ocupada en la BD
+          
+        print(self.resultados)
     except Exception as e:
       print(str(e))
   
