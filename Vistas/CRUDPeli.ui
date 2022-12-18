@@ -197,6 +197,9 @@ background:rgb(167, 212, 235);</string>
     </column>
    </widget>
    <widget class="QLineEdit" name="boxIdpeli">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>40</x>
@@ -356,7 +359,7 @@ border-style: outset</string>
    <widget class="QPushButton" name="btnNuevo">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>330</x>
       <y>60</y>
       <width>91</width>
       <height>41</height>
@@ -424,6 +427,35 @@ color: rgb(0, 170, 255)</string>
     </property>
     <property name="text">
      <string>DIRECTOR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnGrabaNueva">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>60</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="toolTip">
+     <string>Presione para buscar un DNI</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:20px;
+background-color:rgb(85, 170, 255);
+font: 14pt &quot;MS Shell Dlg 2&quot;;
+border: 1px solid black;
+border-style: outset</string>
+    </property>
+    <property name="text">
+     <string>GRABA</string>
+    </property>
+    <property name="default">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>
