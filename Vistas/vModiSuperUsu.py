@@ -139,4 +139,4 @@ class PantallaModi(QWidget):
             QMessageBox.critical(self, "Exito","Se han modificado los Datos Exitosamente")
             
             
-                
+
