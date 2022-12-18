@@ -37,7 +37,7 @@ class ventanaBienvenida(QMainWindow):
     self.show()
   
   def reserva(self):
-    self.vReserva = vReserva.ventanaReserva()
+    self.vReserva = vReserva.ventanaReserva(self.datosUsuario)
   
   def modifica(self):
     if self.datosUsuario[6] == 1 : 
@@ -57,3 +57,12 @@ class ventanaBienvenida(QMainWindow):
   def logout(self):
     self.close()
   
+  def closeEvent(self, event):
+    #Cierra todas las ventanas abiertas
+    try:
+        self.vReserva.close() 
+        self.vModifica.close()
+        self.vSala.close()
+        self.vButaca.close()
+    except:
+        pass
