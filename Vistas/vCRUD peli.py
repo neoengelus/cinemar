@@ -8,17 +8,31 @@ from PyQt5.QtGui import QPixmap
 import sqlite3
 
 class PantallaModi(QWidget):
+    
     usuarioActivo=False
     def __init__(self):
         super(PantallaModi, self).__init__()
         loadUi(".\Vistas\CRUDPeli.ui",self)
+        self.id=0
         self.cargaTablaPeli()
         self.btnConfirmar.clicked.connect(self.revisarCampos)
         self.btnEli.clicked.connect(self.eliminarPeli)
         self.btnNuevo.clicked.connect(self.nuevaPeli)
-        list_clasi = ["Geek", "Geeky Geek", "Legend Geek", "Ultra Legend Geek"]
+        self.tableListUsu.clicked.connect(lambda : self.celdaClick())
+        #print (self.id)
+        list_clasi = ["PM13", "PM16", "PM18"]
         self.comboClasi.addItems(list_clasi)
         self.tableListUsu.setColumnWidth(1, 400)
+        self.tableListUsu.setSelectionBehavior(QTableView.SelectRows)
+    
+    def celdaClick(self):
+        lista = self.tableListUsu.currentRow()
+        self.id = self.tableListUsu.item(lista, 0).text()
+        self.boxIdpeli.setText (self.tableListUsu.item(lista, 0).text())
+        self.boxTitulo.setText (self.tableListUsu.item(lista, 1).text())
+        self.boxDuracion.setText (self.tableListUsu.item(lista, 3).text())
+        self.boxDirector.setText (self.tableListUsu.item(lista, 2).text())
+        return 
     
     def nuevaPeli(self):
         titulo=self.boxTitulo.text ()
@@ -125,9 +139,10 @@ class PantallaModi(QWidget):
         for fila in setPelis:
             print (fila)
             self.tableListUsu.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(fila[1])))
-            self.tableListUsu.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(fila[2]))
-            self.tableListUsu.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(fila[4]))           
-            self.tableListUsu.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(fila[3]))           
+            self.tableListUsu.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(fila[3]))
+            self.tableListUsu.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(fila[2]))           
+            self.tableListUsu.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(fila[1]))
+            self.tableListUsu.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(fila[4]))            
             tablerow+=1    
         conn.close        
 # main

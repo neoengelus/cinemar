@@ -113,7 +113,7 @@ class PantallaModi(QWidget):
         if tipo.isdigit()==False:
             QMessageBox.critical(self, "Error","Ingrese un Numero en Tipo")
             return
-        if int(tipo)!=1 and tipo!=0:
+        if int(tipo)!=1 and int(tipo)!=0:
             QMessageBox.critical(self, "Error","Valor Invalido en Tipo")
             return               
         if dni=="" or nom=="" or ape==""or email=="" or edad=="" or tipo=="":
