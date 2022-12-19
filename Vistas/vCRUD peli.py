@@ -64,6 +64,9 @@ class PantallaModi(QWidget):
         duracion=self.boxDuracion.text ()
         clasi=self.comboClasi.currentText()
         director=self.boxDirector.text ()
+        if duracion.isdigit()!=True:
+            QMessageBox.critical(self, "Error","Duracion debe ser un Numero")
+            return
         if titulo=="" or duracion=="" or director=="" :
             QMessageBox.critical(self, "Error","No pueden haber campos vacios")
             return
