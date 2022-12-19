@@ -1,5 +1,5 @@
 # Cinemar
-Proyecto Final 1000 Programadores Salteños Python
+**Proyecto Final 1000 Programadores Salteños Python**
 
 **Sistema de Gestión Cinemar**
 
