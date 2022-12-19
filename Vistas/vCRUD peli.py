@@ -1,4 +1,7 @@
 import sys
+from Vistas.vFuncion import *  #ningun import anda
+from Clases.Butaca import *
+from Clases.Usuario import Usuario
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QWidget
@@ -7,8 +10,10 @@ from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtGui import QPixmap
 import sqlite3
 
+
 class PantallaModi(QWidget):
-    
+    #objCRUDE=classCRUDEPeli() 
+    #objCRUDE.CreaPeli("./Cinemar.db","yo","yo","yo","yo")
     usuarioActivo=False
     def __init__(self):
         super(PantallaModi, self).__init__()
