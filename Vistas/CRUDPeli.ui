@@ -198,7 +198,7 @@ background:rgb(167, 212, 235);</string>
    </widget>
    <widget class="QLineEdit" name="boxIdpeli">
     <property name="enabled">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -221,7 +221,8 @@ background:rgb(167, 212, 235);</string>
      <string notr="true">border-radius:20px;
 font: 14pt &quot;MS Shell Dlg 2&quot;;
 border: 1px solid black;
-color: rgb(0, 170, 255)</string>
+color: rgb(0, 170, 255);
+background-color:rgb(213, 196, 208)</string>
     </property>
     <property name="text">
      <string/>
@@ -369,7 +370,7 @@ border-style: outset</string>
      <bool>true</bool>
     </property>
     <property name="toolTip">
-     <string>Presione para buscar un DNI</string>
+     <string>Presione para crear una nueva Pelicula</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius:20px;
@@ -442,7 +443,7 @@ color: rgb(0, 170, 255)</string>
      <bool>true</bool>
     </property>
     <property name="toolTip">
-     <string>Presione para buscar un DNI</string>
+     <string>Presione para grabar la nueva Pelicula</string>
     </property>
     <property name="styleSheet">
      <string notr="true">border-radius:20px;
