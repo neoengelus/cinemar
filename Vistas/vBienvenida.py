@@ -46,7 +46,7 @@ class ventanaBienvenida(QMainWindow):
     if self.datosUsuario[6] == 1 : 
       self.vModifica = vUsuarioCarga.ventanaUsuarioCarga()
     else :
-      self.vModifica = vModiSuperUsu.PantallaModi(False,self.datosUsuario)
+      self.vModifica = vModiSuperUsu.PantallaModi()
   
   def sala(self):
     self.vSala = vSala.ventanaSala()
