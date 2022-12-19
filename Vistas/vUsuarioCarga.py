@@ -16,8 +16,10 @@ BD = "./Cinemar.db"
 ICON = "./Assets/cine.png"
 
 class ventanaUsuarioCarga(QWidget):
-  def __init__(self):
+  def __init__(self, datos=[], login = True):
     super(ventanaUsuarioCarga, self).__init__()
+    self.datosUsuario = datos 
+    self.login = login
     self.cargarUi()
   
   def cargarUi(self):
@@ -26,7 +28,10 @@ class ventanaUsuarioCarga(QWidget):
       self.setWindowTitle("Cinemar - Registro de Usuario")
       self.setWindowIcon(QtGui.QIcon(ICON))
       self.btnBuscar.hide()
-      self.btnConfirmar.setText("Registrarse")
+      if self.login :
+        self.btnConfirmar.setText("Registrarse")
+      else :
+        self.btnConfirar.setText("Actualizar")
       self.btnConfirmar.clicked.connect(lambda: self.registro())
       self.box_dni.setText("")
       self.boxTipo.hide()
@@ -47,12 +52,16 @@ class ventanaUsuarioCarga(QWidget):
       if self.esNumero(dni) :
         if edad.isdigit() :
           resultado = bdUsuario.buscarUsuario(BD, dni)
-          if resultado == None :
-            nuevoUsuario = Usuario(nombre, apellido, edad, dni, mail)
-            bdUsuario.altaUsuario(BD, nuevoUsuario, passw)
-            self.exito(f"Se creó correctamente el usuario {dni}")
+          if self.login :
+            if resultado == None :
+              nuevoUsuario = Usuario(nombre, apellido, edad, dni, mail)
+              bdUsuario.altaUsuario(BD, nuevoUsuario, passw)
+              self.exito(f"Se creó correctamente el usuario {dni}")
+            else :
+              self.error(f"El usuario {dni} ya existe")
           else :
-            self.error(f"El usuario {dni} ya existe")
+            nuevoUsuario = Usuario(nombre, apellido, edad, dni, mail)
+            bdUsuario.actualizarUsuario(BD, nuevoUsuario, passw)
         else :
           self.error("La edad debe ser un número")
       else :

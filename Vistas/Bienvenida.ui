@@ -74,7 +74,7 @@
        <x>240</x>
        <y>80</y>
        <width>231</width>
-       <height>361</height>
+       <height>371</height>
       </rect>
      </property>
      <property name="orientation">
@@ -118,6 +118,16 @@
       </property>
       <property name="text">
        <string>Peliculas</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnFuncion">
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Funciones</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnButaca">

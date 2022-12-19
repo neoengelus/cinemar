@@ -10,6 +10,9 @@ from PyQt5.QtWidgets import QLineEdit
 from PyQt5.QtGui import QPixmap
 import sqlite3
 
+BD = "./Cinemar.db"
+ICON = "./Assets/cine.png"
+
 
 class PantallaModi(QWidget):
     #objCRUDE=classCRUDEPeli() 
@@ -33,10 +36,14 @@ class PantallaModi(QWidget):
         self.tableListUsu.setColumnWidth(1, 300)
         self.tableListUsu.setSelectionBehavior(QTableView.SelectRows)
         self.btnGrabaNueva.setVisible(False)
+        self.setWindowIcon(QtGui.QIcon(ICON))
+        self.setWindowTitle("Cinemar - Gestión de Películas")
+        self.setFixedSize(966,723)
+        self.show()
         
     def salepantalla(self):
         try:
-            widget.close()
+            self.close()
         except:
             print("Exiting")
         
@@ -144,15 +151,3 @@ class PantallaModi(QWidget):
             self.tableListUsu.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(fila[4]))            
             tablerow+=1    
         #conn.close        
-# main
-BD = "./Cinemar.db"
-app = QApplication(sys.argv)
-pantModi1 = PantallaModi()
-widget = QtWidgets.QStackedWidget()
-widget.addWidget(pantModi1)
-widget.show()
-
-try:
-    sys.exit(app.exec_())
-except:
-    print("Exiting")
